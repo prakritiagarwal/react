@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 const App = () => {
   const [selected, setSelected] = useState(0)  
+  const [maxVoteIndex, setMaxVoteIndex] = useState(0)
 
   const handleButtonClick = () => {    
     let randomIndex = Math.floor(Math.random() * anecdotes.length);
@@ -11,8 +12,9 @@ const App = () => {
   const handleVoteClick = () => {  
     const copy = [...votes];
     copy[selected] = copy[selected]+1;
-    setVotes(copy);   
-  }
+    setVotes(copy); 
+    setMaxVoteIndex(copy.indexOf(Math.max(...copy)));  
+  }  
 
   const anecdotes = [
     'If it hurts, do it more often',
@@ -28,11 +30,14 @@ const App = () => {
 
   return (
     <div>
-      <h1>Anecdotes</h1>
+      <h1>Anecdotes of the day</h1>
       <button onClick={handleVoteClick}>Vote</button>  
       <button onClick={handleButtonClick}>Next Anecdote</button>
       <h2>{anecdotes[selected]}</h2>   
-      <h3>has {votes[selected]} votes.</h3>   
+      <h3>has {votes[selected]} votes.</h3>  
+      <h1>Anecdotes with most votes</h1>     
+      <h2>{anecdotes[maxVoteIndex]}</h2>   
+      <h3>has {votes[maxVoteIndex]} votes.</h3>
     </div>
   )
 }
