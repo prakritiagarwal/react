@@ -7,7 +7,7 @@ const Statistics = (props) => {
   {
     return (
       <>
-        <h2>Stattistics</h2>
+        <h2>Statistics</h2>
         <h3>No feedback given</h3>
       </>
     )
@@ -16,13 +16,17 @@ const Statistics = (props) => {
   {
     return (
       <>
-        <h2>Stattistics</h2>
-        <StatisticLine text='Good' value={good}/>
-        <StatisticLine text='Neutral' value={neutral}/>
-        <StatisticLine text='Bad' value={bad}/>
-        <StatisticLine text='All' value={total}/>
-        <StatisticLine text='Average' value={(good - bad)/total}/>
-        <StatisticLine text='Positive' value={(good * 100)/total}/>        
+        <h2>Statistics</h2>
+        <table>
+          <tbody>
+            <StatisticLine text='Good' value={good}/>
+            <StatisticLine text='Neutral' value={neutral}/>
+            <StatisticLine text='Bad' value={bad}/>
+            <StatisticLine text='All' value={total}/>
+            <StatisticLine text='Average' value={(good - bad)/total}/>
+            <StatisticLine text='Positive' value={(good * 100)/total}/>
+          </tbody>          
+        </table>            
       </>   
     )
   }  
@@ -31,7 +35,10 @@ const Statistics = (props) => {
 const StatisticLine = (props) => {
   const{text, value} = props;
   return(
-    <h3>{text} {value}</h3>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
@@ -62,7 +69,8 @@ const App = () => {
   }
 
   return (
-    <div>      
+    <div>
+      <h1>Give Feedback</h1>      
       <Button onClick={handleGoodClick} text='Good'/>
       <Button onClick={handleNeutralClick} text='Neutral'/>
       <Button onClick={handleBadClick} text='Bad'/>
